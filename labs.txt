@@ -1,0 +1,386 @@
+Lesson 1 - Retrieving Data Using the SQL SELECT Statement
+1.	Отделу кадров требуется список сотрудников: фамилия, код должности, дата приема на работу и код сотрудника. Дату приема на работe назовите STARTDATE.
+2.	Отделу кадров требуется список существующих кодов должностей из таблицы EMPLOYEES. Список не должен содержать одинаковых записей.
+3.	Отделу кадров требуется список сотрудников: фамилия, код должности, дата приема на работу и код сотрудника. Дату приема на работу назовите «Hire Date». Код сотрудника назовите «Emp #». Фамилию назовите «Employee». Код должности назовите «Job».
+4.	Отдел кадров запросил отчет по сотрудникам (фамилия) и занимаемым ими должностям. Вывод информации одной колонкой, названной «Employee and Title». Фамилия и должность разделяются запятой с пробелом.
+5.	Отдел кадров запросил отчет по сотрудникам (фамилия), получаемой зарплате, зарплате в следующем году. Зарплата следующего года по условиям индексации увеличивается на 15%. Фамилию сотрудника назовите «Employee», зарплату следующего года – «Next Year Salary».
+6.	Отдел кадров запросил информацию о заработке сотрудников компании за год. Зарплата у сотрудников в течении года не менялась. 
+7.	Отдел кадров запросил информацию о заработке сотрудников компании за год. Зарплата у сотрудников в течении года не менялась. Требуется вывести эту информацию одной колонкой, названной «Total salary» в виде предложения «employee for the year received 200», где вместо employee – фамилия сотрудника, вместо 200 – заработок за год. Также, отдельной колонкой вывести зарплату с учетом персональной надбавки и назвать колонку «Premium salary». 
+8.	Отдел кадров запросил информацию о зарплате сотрудников. Информация должна быть выведена одной колонкой по примеру «Steven’s salary is 2000».
+9.	Отдел кадров запросил решил составить телефонный справочник сотрудников. Информация должна быть выведена одной колонкой по примеру «Steven King has phone number 234234».
+10.	Отделу кадров требуется список существующих кодов подразделений из таблицы EMPLOYEES. Список не должен содержать одинаковых записей.
+1 	
+SELECT last_name, job_id, hire_date AS STARTDATE, employee_id
+FROM employees;
+
+2.
+SELECT DISTINCT job_id
+FROM employees;
+
+3.
+SELECT last_name AS "Employee", job_id AS "Job", hire_date AS "Hire Date", employee_id AS "Emp#"
+FROM employees;
+4.
+SELECT last_name || ', ' || job_id AS "Employee and Title"
+FROM employees;
+
+5.
+SELECT last_name AS "Employee", salary * 1.15 AS "Next Year Salary"
+FROM employees;
+
+6.
+SELECT last_name, salary * 12 AS "Yearly Salary"
+FROM employees;
+
+7.
+SELECT last_name || ' for the year received ' || (salary * 12) AS "Total salary", salary * commission_pct AS "Premium salary"
+FROM employees;
+
+8.
+SELECT first_name || '’s salary is ' || salary AS SALARY
+FROM employees;
+
+9.
+SELECT first_name || ' ' || last_name || ' has phone number ' || phone_number AS PHONE NUMBER
+FROM employees;
+
+10.
+SELECT DISTINCT department_id
+FROM employees;
+
+Lesson 2 - Restricting and Sorting Data
+1.	Отделу кадров требуется список сотрудников (фамилия, имя), получающих зарплату более 12000$.
+2.	Отделу кадров требуется узнать фамилию и подразделение у сотрудника с кодом 176.
+3.	Отделу кадров требуется список сотрудников (фамилия, имя, зарплата, код департамента), не имеющих среднюю зарплату. Средняя зарплата находится в диапазоне от 5 до 12 тысяч. Используйте условие BETWEEN.
+4.	Создайте отчет, показывающий фамилию сотрудника, код должности, дату принятия на работу у сотрудников с фамилиями Matos и Taylor. Используйте условие IN.
+5.	Создайте отчет, показывающий фамилию сотрудника и код департамента у всех сотрудников из 20 и 50 департамента. Используйте условие IN.
+6.	Отделу кадров требуется список сотрудников (фамилия, имя, зарплата, код департамента), имеющих среднюю зарплату. Средняя зарплата находится в диапазоне от 5 до 12 тысяч. Используйте условие BETWEEN. Назовите колонки Employee, Monthly Salary
+7.	Отделу кадров требуется список сотрудников (Фамилия, код), которые были приняты в 2002 году.
+8.	Создайте отчет для отображения фамилии и кода должности у сотрудников без начальника.
+9.	Отобразите всех сотрудников (имя, фамилия, зарплата, величина надбавки), имеющих надбавку. Полученный список отсортируйте по убыванию зарплаты и надбавки.
+10.	Отобразите всех сотрудников (имя, фамилия, зарплата), у которых зарплата больше 10000.
+11.	Отобразите всех сотрудников (код, имя, фамилия, зарплата, подразделение), работающих в подчинении у сотрудника с кодом 103; 201; 124. Результат сортировать по фамилии.
+12.	Отобразите всех сотрудников (код, имя, фамилия), в фамилии которых третья буква А.
+13.	Отобразите всех сотрудников (код, имя, фамилия), в фамилии которых содержатся буквы А,Е.
+14.	Отобразите всех сотрудников (код, имя, фамилия, зарплата), имеющих должность SA_REP и ST_CLERK. Исключите также сотрудников с зарплатами 2500, 3500, 7000.
+15.	Отобразите всех сотрудников (код, имя, фамилия, зарплата), у которых надбавка 0.20. 
+16.	Создайте отчет, отображения фамилии, кода должности, зарплаты, надбавки, зарплаты с учетом надбавки у сотрудников, имеющих надбавку. 
+17.	Напишите запрос, отражающих всех сотрудников, код занимаемой должности которых начинается на «SA_». В запросе отразите код сотрудника, его фамилию, код занимаемой должности.
+
+1. SELECT last_name, first_name FROM employees WHERE salary > 12000;
+2. SELECT last_name, department_id FROM employees WHERE employee_id = 176;
+3. SELECT last_name, first_name, salary, department_id FROM employees 
+   WHERE salary NOT BETWEEN 5000 AND 12000;
+4. SELECT last_name, job_id, hire_date FROM employees
+   WHERE last_name IN ('Matos', 'Taylor');
+5. SELECT last_name, department_id FROM employees
+   WHERE department_id IN (20,50);
+6. SELECT last_name AS Employee , CAST((salary/12) AS DECIMAL(8,2)) AS "Monthly Salary"
+   FROM employees 
+   WHERE salary BETWEEN 5000 AND 12000;
+7. SELECT last_name, employee_id FROM employees 
+WHERE EXTRACT(year FROM hire_date) = 2002;
+8. SELECT last_name, job_id FROM employees WHERE manager_id IS NULL;
+9. SELECT first_name, last_name, salary, commission_pct
+FROM employees
+WHERE commission_pct IS NOT NULL
+ORDER BY salary DESC, commission_pct DESC;
+10.SELECT first_NAME,last_NAME,salary	
+FROM Employees	
+WHERE salary>10000 ORDER BY Salary DESC ;  
+11.
+ SELECT employee_id, first_name, last_name, salary, department_id
+ FROM employees 
+WHERE manager_id IN (103, 201, 124) 
+ORDER BY last_name;      
+12.
+SELECT employee_id, first_name, last_name
+FROM employees
+WHERE last_name LIKE '__a%';
+13. SELECT employee_id, first_name, last_name
+FROM employees
+WHERE last_name LIKE '%a%' AND last_name LIKE '%e%'  ;
+14. SELECT employee_id, first_name, last_name, salary
+FROM employees
+WHERE job_id IN ('SA_REP', 'ST_CLERK') AND salary NOT IN (2500, 3500, 7000);
+15.SELECT Employee_Id,last_Name,FIRST_NAME,salary FROM EMPLOYEES where COMMISSION_PCT= 0.20;
+16. SELECT last_name, job_id, salary, commission_pct, salary + (salary * commission_pct) AS total_salary FROM employees 
+WHERE commission_pct IS NOT NULL;
+17. 
+SELECT employee_id, last_name, job_id
+FROM employees
+WHERE job_id LIKE 'SA_%';
+Lesson 3 - Using Single-Row Functions to Customize Output
+1.	Получите текущую дату, поле назовите Date.
+SELECT now() as Date;
+2.	Отделу кадров требуется отчет, отображающий код сотрудника, фамилию, зарплату, зарплату умноженную на 1.155 (15.5%). Значение округлите до целого числа, назовите «New Salary».
+SELECT employee_id AS "Employee Code", last_name AS "Last Name", salary AS "Salary",
+       ROUND(salary * 1.155) AS "New Salary"
+FROM employees;
+3.	Напишите запрос, выводящий всех сотрудников вторая буква фамилии которых – а. Используйте функцию SUBSTR|SUBSTRING.
+SELECT *
+FROM employees
+WHERE last_name LIKE '_a%';
+
+SELECT last_name 
+FROM employees
+WHERE substring(last_name from 2 for 1) = 'a';
+4.	Отделу кадров требуется отчет, отображающий код сотрудника, фамилию, зарплату, зарплату умноженную на 1.155 (15.5%), разницу между новой и старой зарплатой. Значения округлите до целого числа, назовите «New Salary», «Increase».
+SELECT employee_id AS "Employee Code", last_name AS "Last Name", salary AS "Salary",
+       ROUND(salary * 1.155) AS "New Salary",
+       ROUND((salary * 1.155) - salary) AS "Increase"
+FROM employees;
+5.	Напишите запрос, показывающий фамилию, фамилию с большой буквы (используйте функцию INITCAP), длину фамилии в символах у всех сотрудников, фамилии которых начинаются на J, M, A. Результат отсортируйте возрастанию.
+SELECT last_name AS "Last Name", INITCAP(last_name) AS "Capitalized Last Name",
+       LENGTH(last_name) AS "Last Name Length"
+FROM employees
+WHERE last_name LIKE 'J%' OR last_name LIKE 'M%' OR last_name LIKE 'A%'
+ORDER BY last_name ASC;
+6.	Отдел кадров требует список сотрудников (фамилия, имя), количество отработанных месяцев в компании. Используйте функции ROUND, AGE, EXTRACT, NOW.
+SELECT last_name, first_name,extract(year FROM age(now()::date, hire_date))* 12 + extract(month FROM age(now()::date, hire_date)) FROM employees;
+7.	Создайте отчет, выводящий предложение «<emp last name> earns <salary> monthly, but wants <3*salary>». Назовите колонку Dream Salary. Используйте функцию FORMAT.
+SELECT FORMAT('%s earns %s monthly, but wants %s', last_name, salary, 3*salary) AS "Dream Salary"
+FROM employees;
+
+8.	Отдел кадров требует список сотрудников (фамилия, имя), получаемую зарплату. Зарплата должна быть длинной 15 символов. Недостающую длину заполнить $ в начале. Используйте функции LPAD.
+SELECT last_name, first_name, LPAD(salary::text, 15, '$') AS "salary" FROM employees;
+9.	Создайте отчет, выводящий предложение «<emp last name in upper case> earns <salary> monthly, but wants <3*salary>». Назовите колонку Dream Salary. Используйте функцию FORMAT, UPPER.
+SELECT FORMAT('%s, earns, %s, monthly, but wants %s', UPPER(last_name), salary, 3*salary) AS "Dream Salary" FROM employees;
+10.	Отдел кадров требует список сотрудников (фамилия, имя), количество отработанных месяцев в компании. Фамилия должна быть выведена заглавными буквами, а имя нет. Используйте функции ROUND, AGE, EXTRACT, NOW, UPPER, LOWER. 
+SELECT UPPER(last_name) AS "Last_name", LOWER(first_name), ROUND(EXTRACT(EPOCH FROM NOW() - hire_date)/(60*60*24*30)) AS "Months Worked" FROM employees;
+11.	Отдел кадров требует список сотрудников (фамилия, имя), получаемую зарплату. Зарплата должна быть длинной 10 символов. Недостающую длину заполнить 0 в конце. Используйте функции RPAD.
+SELECT CONCAT(last_name, ' ', first_name) AS "Full Name", RPAD(salary::text, 10, '0') AS "Salary" FROM employees;
+
+12.	Напишите запрос, выводящий всю информацию из таблицы сотрудников, длина фамилии которых больше трех символов. Используйте функцию SUBSTR|SUBSTRING.
+SELECT * FROM employees
+WHERE substr(last_name, 3) != '';
+13.	Напишите запрос, выводящий всю информацию из таблицы сотрудников, длина фамилии которых больше трех символов. Используйте функцию LENGTH.
+SELECT * FROM employees WHERE LENGTH(last_name) > 3;
+
+
+14.	Напишите запрос, выводящий всю информацию из таблицы сотрудников. Если фамилия начинается или заканчивается на букву K – выводить фамилию без этой буквы. Используйте функцию TRIM.
+SELECT CASE WHEN last_name LIKE 'K%' THEN TRIM(BOTH 'K' FROM last_name) WHEN last_name LIKE '%K' THEN TRIM(BOTH 'K' FROM last_name) ELSE last_name END AS "Last_name without K", first_name FROM employees;
+
+
+15.	Напишите запрос, выводящий всю информацию из таблицы сотрудников, в фамилии которых есть буквосочетание «in». Используйте функцию POSITION.
+SELECT * FROM employees WHERE POSITION('in' IN last_name) > 0;
+
+
+16.	Напишите запрос, выводящий всю информацию из таблицы сотрудников. Если в фамилии есть буквосочетание «in» - замените его на «pm». Используйте функцию REPLACE.
+SELECT CONCAT(REPLACE(last_name, 'in', 'pm'), ' ', first_name) AS "Full Name" FROM employees;
+
+
+17.	Напишите запрос, выводящий всю информацию из таблицы сотрудников, в фамилии которых вторая буква - «i». Используйте функцию POSITION.
+SELECT * FROM employees WHERE POSITION('i' IN last_name) = 2;
+
+
+18.	Напишите запрос, выводящий всю информацию из таблицы EMPLOYEES одной колонкой. Назовите ее «THE OUTPUT». Используйте функцию CONCAT_WS.
+SELECT CONCAT_WS(',', last_name, first_name, hire_date::text, salary::text, department_id::text, manager_id::text) AS "THE OUTPUT" FROM employees;
+
+Lesson 4 - Reporting Aggregated Data Using the GROUP Functions
+1.	Напишите запрос, показывающий максимальную, минимальную, среднюю, а также сумму всех зарплат в таблице EMPLOYEES. Одним запросом. Колонки назвать соответственно Maximum, Minimum, Average, Sum. Результат округлить до целого числа.
+SELECT max(salary), min(salary), round(avg(salary)) as avg, sum(salary)
+FROM employees;
+2.	Напишите запрос, показывающий максимальную, минимальную, среднюю, а также сумму всех зарплат в таблице EMPLOYEES для каждой должности. Одним запросом. Колонки назвать соответственно Maximum, Minimum, Average, Sum. Результат округлить до целого числа.
+SELECT job_id, max(salary), min(salary), round(avg(salary)) as avg, sum(salary) 
+FROM employees
+GROUP by job_id;
+
+
+3.	Выведете список должностей, с количеством человек, занимаемых эту должность.
+SELECT job_id, count(*) 
+FROM employees
+GROUP by job_id;
+
+4.	Выведете количество разных руководителей. Назовите колонку «Number Of Manager».
+SELECT count(distinct manager_id) as "Number Of Manager"
+FROM employees;
+
+5.	Получите разницу между самой большой и самой маленькой зарплатой. Колонку назовите DIFFERENCE.
+SELECT max(salary) - min(salary) as difference
+FROM employees;
+
+6.	Для каждого руководителя покажите минимальную зарплату в группе его подчиненных.
+SELECT manager_id, min(salary)
+FROM employees
+GROUP by manager_id;
+
+
+7.	Для каждого руководителя покажите минимальную зарплату в группе его подчиненных, начиная от 6000$. Исключите сотрудников, у которых нет руководителя. Полученные группу отсортируйте по убыванию.
+SELECT manager_id, min(salary)
+FROM employees
+GROUP by manager_id having min(salary) > 6000 and manager_id is not null;
+
+8.	Для каждого руководителя покажите среднюю зарплату в группе его подчиненных.
+SELECT manager_id, round(avg(salary)) as avg
+FROM employees
+GROUP by manager_id;
+
+
+
+Lesson 5 - Displaying Data FROM Multiple Tables
+
+1.	Напишите запрос, показывающий адреса для всех подразделений. В запросе отразите location_id, улицу, город, штат, страну. Используйте NATURAL JOIN.
+SELECT location_id, street_address, city, state_province, country_id, country_name FROM locations
+natural join countries;
+
+2.	Напишите запрос, показывающий информацию о сотрудниках. Запрос должен отображать фамилию, код подразделения (department_id), название подразделения.
+SELECT last_name, department_id, department_name FROM employees
+natural join departments;
+
+
+3.	Напишите запрос, предоставляющий информацию о сотрудниках, находящихся в Торонто. В запросе отразите фамилию, код занимаемой должности, код подразделения (department_id), название подразделения.
+SELECT last_name, job_id, department_id, department_name FROM employees
+natural join departments
+natural join locations
+WHERE city = 'Toronto';
+
+4.	Напишите запрос, показывающий информацию о сотрудниках и их руководителях.  В запросе отразите код сотрудника, фамилию сотрудника, код руководителя, фамилию руководителя. 
+SELECT e.employee_id, e.last_name, e.manager_id, m.last_name as manager_last_name
+FROM employees e LEFT JOIN employees m 
+ON e.manager_id = m.employee_id;
+5.	Основываясь на запросе в п.4, дополните его таким образом, чтобы выводились сотрудники, у которых нет руководителя.
+SELECT e.employee_id, e.last_name, e.manager_id, m.last_name as manager_last_name
+ FROM employees e LEFT JOIN employees m ON e.manager_id = m.employee_id 
+WHERE e.manager_id IS NULL;
+6.	Напишите запрос, показывающий руководителей по каждому подразделению. Используйте таблицы departments, employees. В запросе покажите код подразделения, название подразделения, код сотрудника, его фамилию.
+SELECT departments.department_id, departments.department_name, employees.employee_id, employees.last_name FROM departments 
+INNER JOIN employees ON departments.manager_id = employees.employee_id;
+
+7.	Напишите запрос, отображающий информацию о подразделениях, их руководителей, входящих в состав подразделений сотрудников. В запросе отразите код подразделения, название подразделения, фамилию руководителя подразделения, код подчиненного сотрудника, фамилию подчиненного SELECT d.department_id, d.department_name, man.last_name as manager_last_name, e.employee_id, e.last_name as employee_last_name
+ FROM departments d 
+inner join employees e
+ on(d.department_id = e.department_id)
+ inner join employees man on(d.manager_id = man.employee_id);
+8.	Напишите запрос, отображающий информацию о сотрудниках, которые были приняты на работу после того, как был принят сотрудник Davis. В запросе отразите код сотрудника, его фамилию, дату принятия на работу, дату принятия на работу Davis’а.
+SELECT e.employee_id, e.last_name, e.hire_date, d.hire_date
+FROM employees d
+join employees e
+on(e.hire_date > d.hire_date and d.last_name = 'Davies');
+
+
+9.	Напишите запрос, отражающий информацию о сотрудниках, которые были приняты раньше, чем свои руководители. В запросе покажите код сотрудника, фамилию сотрудника, дату принятия на работу, фамилию руководителя, дату принятия на работу руководителя.
+SELECT e.employee_id, e.last_name, e.hire_date, man.last_name, man.hire_date
+FROM employees man
+join employees e
+on(e.hire_date < man.hire_date and e.manager_id = man.employee_id);
+
+10.	Напишите запрос, отражающий количество сотрудников в каждом подразделении. В запросе покажите код подразделения, название подразделения, количество сотрудников, работающих в нем.
+SELECT d.department_id, d.department_name, count(e.employee_id)
+FROM employees e
+inner join departments d
+on(e.department_id = d.department_id)
+GROUP by d.department_id, d.department_name;
+
+
+11.	Напишите запрос, отображающий информацию о сотрудниках, которые меняли свою работу более 1 раза. В запросе отразите код сотрудника, фамилию, количество должностей, занимаемых сотрудником.
+SELECT e.employee_id, count(h.job_id) as job_count
+FROM employees e
+join job_history h
+on(e.employee_id = h.employee_id)
+GROUP by e.employee_id having count(h.job_id) > 1;
+
+12.	Напишите запрос, отображающий информацию о сотрудниках, зарплата которых больше, чем зарплата их руководителей. В запросе отразите код сотрудника, фамилию, код руководителя, фамилию руководителя.
+SELECT e.employee_id, e.last_name, e.manager_id, m.last_name AS manager_last_name 
+FROM employees e JOIN employees m ON (e.manager_id = m.employee_id) 
+WHERE e.salary > m.salary;
+Lesson 6 – Using queries to solve queries
+1.	Напишите запрос, показывающий фамилию и дату принятия на работу у сотрудников, работающих с сотрудником  Zlotkey, исключая самого Zlotkey. Используйте подзапрос, для получения кода подразделения у сотрудника Zlotkey.
+SELECT last_name, hire_date 
+FROM employees
+WHERE last_name not like 'Zlotkey' and department_id = (SELECT department_id FROM employees WHERE last_name like 'Zlotkey');
+2.	Напишите запрос, показывающий всех сотрудников, получающих заработную плату выше средней. Полученный результат должен быть отсортирован по возрастанию заработной платы.
+SELECT last_name, salary
+FROM employees
+WHERE salary > (SELECT avg(salary) FROM employees)
+order by salary;
+
+3.	Для каждого сотрудника покажите название отдела, в котором он работает. Используйте подзапрос для получения названия отдела
+SELECT last_name, 
+(SELECT department_name FROM departments 
+WHERE department_id = employees.department_id) 
+FROM employees;
+
+4.	Напишите запрос, показывающий всех сотрудников, находящихся в подчинении у сотрудника с фамилией King.
+SELECT last_name 
+FROM employees
+WHERE manager_id in
+(SELECT employee_id FROM employees 
+WHERE last_name like 'King');
+
+5.	Напишите запрос, показывающий всех сотрудников, работающих в отделе Executive.
+SELECT last_name
+FROM employees
+WHERE department_id = 
+(SELECT department_id FROM departments 
+WHERE department_name like 'Executive');
+6.	Напишите запрос, показывающий всех сотрудников компании, получающих заработную плату выше средней и работающих в подразделении, у которого в названии содержится буква “u”.
+SELECT last_name
+FROM employees
+WHERE department_id in 
+(SELECT department_id FROM departments 
+WHERE department_name like '%u%')
+and salary > (SELECT avg(salary) FROM employees);
+
+
+
+
+7.	Для каждого подразделения покажите минимальную зарплату, среди сотрудников, получающих зарплату выше средней.
+SELECT department_id, min(salary) 
+FROM employees
+WHERE salary > (SELECT avg(salary) FROM employees)
+GROUP by department_id;
+
+8.	Напишите запрос, отображающий все подразделения, в которых работают сотрудники с кодом занимаемой должности SA_REP. Код подразделения получите подзапросом.
+SELECT department_name FROM departments
+WHERE department_id in (SELECT department_id 
+FROM employees WHERE job_id like 'SA_REP');
+
+
+9.	Для запроса из п.8 исключите сотрудников, у которых код подразделения не указан.
+SELECT department_name FROM departments
+WHERE department_id in (SELECT distinct department_id 
+FROM employees WHERE job_id like 'SA_REP')
+and department_id is not null;
+
+
+Lesson 7 – Using set operators
+1.	Напишите запрос, отображающий список подразделений, не содержащих сотрудников с кодом должности ST_CLERK. Используйте конструкцию MINUS.
+SELECT department_name
+FROM departments
+except
+SELECT department_name
+FROM departments
+WHERE department_id in 
+(SELECT department_id
+FROM employees
+WHERE job_id like 'ST_CLERK');
+
+2.	Напишите запрос, отображающий список стран, в которых не расположены подразделения.
+SELECT country_id FROM countries
+except
+SELECT country_id FROM countries
+WHERE country_id in
+(SELECT country_id FROM locations
+WHERE location_id in 
+(SELECT location_id FROM departments));
+
+
+3.	Отобразите сотрудников, работающих в подразделениях 10, 20, 50. Используйте конструкцию UNION для объединения сотрудников из каждого подразделения.
+SELECT last_name FROM employees
+WHERE department_id = 10
+union
+SELECT last_name FROM employees
+WHERE department_id = 20
+union
+SELECT last_name FROM employees
+WHERE department_id = 50;
+
+4.	Напишите запрос, отображающий код сотрудника и код занимаемой должности для тех сотрудников, которые меняли работу, но вернулись к своей первоначальной должности. Используйте конструкцию INTERSECT.
+SELECT employee_id, job_id
+FROM employees
+intersect 
+SELECT employee_id, job_id
+FROM job_history;
+
+
